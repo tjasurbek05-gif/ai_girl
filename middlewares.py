@@ -37,6 +37,7 @@ class RegisterMiddleware(BaseMiddleware):
                     logger.info("Registered new user %s (lang=%s)", tg_user.id, lang)
                 except Exception as exc:
                     logger.exception("Failed to register user %s: %s", tg_user.id, exc)
+                    db_user = await get_user(tg_user.id)
 
         data["db_user"] = db_user
         return await handler(event, data)

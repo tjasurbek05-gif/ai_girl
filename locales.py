@@ -2,11 +2,8 @@ from typing import Any
 
 STRINGS: dict[str, dict[str, Any]] = {
     "en": {
-        # Onboarding
         "choose_lang": "👋 Welcome to <b>Velvet</b>!\n\nChoose your language:",
         "lang_set": "Language set ✅",
-
-        # Main menu
         "main_menu": (
             "🏠 <b>Main Menu</b>\n\n"
             "⚡ Energy: <b>{energy}/49</b>  |  💎 Gems: <b>{gems}</b>\n"
@@ -14,26 +11,14 @@ STRINGS: dict[str, dict[str, Any]] = {
         ),
         "sub_active": "✨ Premium: <b>active</b> until {expires}",
         "sub_none": "✨ Premium: <b>not active</b>",
-
-        # Characters
-        "choose_character": (
-            "💬 <b>Choose a character</b>\n"
-            "Who would you like to spend time with?"
-        ),
-        "character_card": (
-            "{avatar} <b>{name}</b>\n"
-            "<i>{tagline}</i>\n\n"
-            "🎭 <b>Choose a scenario:</b>"
-        ),
+        "choose_character": "💬 <b>Choose a character</b>\nWho would you like to spend time with?",
+        "character_card": "{avatar} <b>{name}</b>\n<i>{tagline}</i>\n\n🎭 <b>Choose a scenario:</b>",
         "not_enough_gems": (
             "💎 <b>Not enough gems!</b>\n\n"
             "This scenario costs <b>{cost} gems</b>.\n"
-            "You have <b>{gems}</b>.\n\n"
-            "Visit the 🛍️ Shop to get more."
+            "You have <b>{gems}</b>.\n\nVisit the 🛍️ Shop to get more."
         ),
         "gems_spent": "💎 <b>{cost} gems</b> spent. Let's begin! ✨",
-
-        # Chat
         "chat_new": "✨ <i>Starting a new conversation…</i>",
         "chat_continue": "✨ <i>Continuing your conversation…</i>",
         "chat_reset_done": "🔄 <i>Chat cleared. Starting fresh…</i>",
@@ -44,8 +29,6 @@ STRINGS: dict[str, dict[str, Any]] = {
         ),
         "ai_error": "⚠️ Couldn't get a response. Please try again.",
         "chat_hint": "<i>Type your message to {name}…</i>",
-
-        # Profile
         "profile": (
             "👤 <b>Your Profile</b>\n\n"
             "⚡ Energy today: <b>{energy}/49</b>\n"
@@ -55,8 +38,6 @@ STRINGS: dict[str, dict[str, Any]] = {
         ),
         "premium_until": "active until <b>{expires}</b>",
         "no_premium": "not active",
-
-        # Shop
         "shop_title": (
             "🛍️ <b>Shop</b>\n\n"
             "Upgrade to <b>Premium</b>:\n"
@@ -71,20 +52,14 @@ STRINGS: dict[str, dict[str, Any]] = {
             "⭐ Premium active until <b>{expires}</b>\n"
             "💎 <b>+{gems} gems</b> added to your account!"
         ),
-
-        # Generic
         "back": "← Back",
         "main_menu_btn": "🏠 Main Menu",
         "reset_chat": "🔄 Reset chat",
         "error_generic": "⚠️ Something went wrong. Please try again.",
     },
-
     "ru": {
-        # Onboarding
         "choose_lang": "👋 Добро пожаловать в <b>Velvet</b>!\n\nВыбери язык:",
         "lang_set": "Язык установлен ✅",
-
-        # Main menu
         "main_menu": (
             "🏠 <b>Главное меню</b>\n\n"
             "⚡ Энергия: <b>{energy}/49</b>  |  💎 Кристаллы: <b>{gems}</b>\n"
@@ -92,26 +67,14 @@ STRINGS: dict[str, dict[str, Any]] = {
         ),
         "sub_active": "✨ Премиум: <b>активен</b> до {expires}",
         "sub_none": "✨ Премиум: <b>не активен</b>",
-
-        # Characters
-        "choose_character": (
-            "💬 <b>Выбери персонажа</b>\n"
-            "С кем хочешь провести время?"
-        ),
-        "character_card": (
-            "{avatar} <b>{name}</b>\n"
-            "<i>{tagline}</i>\n\n"
-            "🎭 <b>Выбери сценарий:</b>"
-        ),
+        "choose_character": "💬 <b>Выбери персонажа</b>\nС кем хочешь провести время?",
+        "character_card": "{avatar} <b>{name}</b>\n<i>{tagline}</i>\n\n🎭 <b>Выбери сценарий:</b>",
         "not_enough_gems": (
             "💎 <b>Недостаточно кристаллов!</b>\n\n"
             "Этот сценарий стоит <b>{cost} кристаллов</b>.\n"
-            "У тебя <b>{gems}</b>.\n\n"
-            "Зайди в 🛍️ Магазин, чтобы получить больше."
+            "У тебя <b>{gems}</b>.\n\nЗайди в 🛍️ Магазин, чтобы получить больше."
         ),
         "gems_spent": "💎 Потрачено <b>{cost} кристаллов</b>. Начинаем! ✨",
-
-        # Chat
         "chat_new": "✨ <i>Начинаем новый разговор…</i>",
         "chat_continue": "✨ <i>Продолжаем разговор…</i>",
         "chat_reset_done": "🔄 <i>Чат очищен. Начинаем сначала…</i>",
@@ -122,8 +85,6 @@ STRINGS: dict[str, dict[str, Any]] = {
         ),
         "ai_error": "⚠️ Не удалось получить ответ. Попробуй ещё раз.",
         "chat_hint": "<i>Напиши сообщение для {name}…</i>",
-
-        # Profile
         "profile": (
             "👤 <b>Твой профиль</b>\n\n"
             "⚡ Энергия сегодня: <b>{energy}/49</b>\n"
@@ -133,8 +94,6 @@ STRINGS: dict[str, dict[str, Any]] = {
         ),
         "premium_until": "активен до <b>{expires}</b>",
         "no_premium": "не активен",
-
-        # Shop
         "shop_title": (
             "🛍️ <b>Магазин</b>\n\n"
             "Оформи <b>Премиум</b>:\n"
@@ -149,20 +108,14 @@ STRINGS: dict[str, dict[str, Any]] = {
             "⭐ Премиум активен до <b>{expires}</b>\n"
             "💎 <b>+{gems} кристаллов</b> добавлено на счёт!"
         ),
-
-        # Generic
         "back": "← Назад",
         "main_menu_btn": "🏠 Главное меню",
         "reset_chat": "🔄 Сбросить чат",
         "error_generic": "⚠️ Что-то пошло не так. Попробуй ещё раз.",
     },
-},
     "uz": {
-        # Onboarding
         "choose_lang": "👋 <b>Velvet</b> ga xush kelibsiz!\n\nTilni tanlang:",
         "lang_set": "Til o'rnatildi ✅",
-
-        # Main menu
         "main_menu": (
             "🏠 <b>Asosiy menyu</b>\n\n"
             "⚡ Energiya: <b>{energy}/49</b>  |  💎 Javohirlar: <b>{gems}</b>\n"
@@ -170,26 +123,14 @@ STRINGS: dict[str, dict[str, Any]] = {
         ),
         "sub_active": "✨ Premium: <b>faol</b>, {expires} gacha",
         "sub_none": "✨ Premium: <b>faol emas</b>",
-
-        # Characters
-        "choose_character": (
-            "💬 <b>Qahramonni tanlang</b>\n"
-            "Kim bilan vaqt o'tkazmoqchisiz?"
-        ),
-        "character_card": (
-            "{avatar} <b>{name}</b>\n"
-            "<i>{tagline}</i>\n\n"
-            "🎭 <b>Stsenariyni tanlang:</b>"
-        ),
+        "choose_character": "💬 <b>Qahramonni tanlang</b>\nKim bilan vaqt o'tkazmoqchisiz?",
+        "character_card": "{avatar} <b>{name}</b>\n<i>{tagline}</i>\n\n🎭 <b>Stsenariyni tanlang:</b>",
         "not_enough_gems": (
             "💎 <b>Javohirlar yetarli emas!</b>\n\n"
             "Bu stsenariy <b>{cost} javohir</b> turadi.\n"
-            "Sizda <b>{gems}</b> bor.\n\n"
-            "Ko'proq olish uchun 🛍️ Do'konga boring."
+            "Sizda <b>{gems}</b> bor.\n\nKo'proq olish uchun 🛍️ Do'konga boring."
         ),
         "gems_spent": "💎 <b>{cost} javohir</b> sarflandi. Boshlaymiz! ✨",
-
-        # Chat
         "chat_new": "✨ <i>Yangi suhbat boshlanmoqda…</i>",
         "chat_continue": "✨ <i>Suhbat davom ettirilmoqda…</i>",
         "chat_reset_done": "🔄 <i>Chat tozalandi. Qaytadan boshlaymiz…</i>",
@@ -200,8 +141,6 @@ STRINGS: dict[str, dict[str, Any]] = {
         ),
         "ai_error": "⚠️ Javob olishning iloji bo'lmadi. Qaytadan urinib ko'ring.",
         "chat_hint": "<i>{name} ga xabar yozing…</i>",
-
-        # Profile
         "profile": (
             "👤 <b>Profilingiz</b>\n\n"
             "⚡ Bugungi energiya: <b>{energy}/49</b>\n"
@@ -211,8 +150,6 @@ STRINGS: dict[str, dict[str, Any]] = {
         ),
         "premium_until": "{expires} gacha faol",
         "no_premium": "faol emas",
-
-        # Shop
         "shop_title": (
             "🛍️ <b>Do'kon</b>\n\n"
             "<b>Premium</b> oling:\n"
@@ -227,19 +164,15 @@ STRINGS: dict[str, dict[str, Any]] = {
             "⭐ Premium <b>{expires}</b> gacha faol\n"
             "💎 <b>+{gems} javohir</b> hisobingizga qo'shildi!"
         ),
-
-        # Generic
         "back": "← Orqaga",
         "main_menu_btn": "🏠 Asosiy menyu",
         "reset_chat": "🔄 Chatni tozalash",
         "error_generic": "⚠️ Xatolik yuz berdi. Qaytadan urinib ko'ring.",
     },
-
 }
 
 
 def t(key: str, lang: str = "en", **kwargs: Any) -> str:
-    """Return a translated string, falling back to English."""
     lang = lang if lang in STRINGS else "en"
     text: str = STRINGS[lang].get(key) or STRINGS["en"].get(key, key)
     if kwargs:

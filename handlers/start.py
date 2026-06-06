@@ -57,13 +57,19 @@ async def cmd_menu(message: Message, db_user: dict | None, state: FSMContext) ->
 
 
 @router.callback_query(F.data == "menu:back")
-async def cb_menu_back(callback: CallbackQuery, db_user: dict, state: FSMContext) -> None:
+async def cb_menu_back(callback: CallbackQuery, db_user: dict | None, state: FSMContext) -> None:
     await state.clear()
+    if db_user is None:
+        await callback.answer("Please send /start first.", show_alert=True)
+        return
     await send_main_menu(callback, db_user["lang"])
 
 
 @router.callback_query(F.data == "menu:characters")
-async def cb_menu_characters(callback: CallbackQuery, db_user: dict) -> None:
+async def cb_menu_characters(callback: CallbackQuery, db_user: dict | None) -> None:
+    if db_user is None:
+        await callback.answer("Please send /start first.", show_alert=True)
+        return
     lang = db_user["lang"]
     await callback.message.edit_text(
         t("choose_character", lang),
