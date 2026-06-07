@@ -1,4 +1,5 @@
 import logging
+import json
 
 from aiogram import Router, F
 from aiogram.filters import Command
@@ -15,6 +16,52 @@ from database import (
 from keyboards import scenarios_keyboard, chat_keyboard, no_energy_keyboard
 from locales import t
 from states import ChatStates
+
+@router.message(F.web_app_data)
+async def handle_webapp_data(message: Message, db_user: dict, state: FSMContext) -> None:
+    lang = db_user["lang"]
+    try:
+        data = json.loads(message.web_app_data.data)
+    except Exception:
+        return
+
+    char_id  = data.get("char_id")
+    scene_id = data.get("scene_id")
+    resume   = data.get("resume", False)
+
+    if not char_id or not scene_id:
+        return
+
+    char     = get_character(char_id)
+    scenario = get_scenario(char_id, scene_id)
+    user_id  = message.from_user.id
+
+    if not char or not scenario:
+        await message.answer(t("error_generic", lang))
+        return
+
+    await state.set_state(ChatStates.chatting)
+    await state.update_data(char_id=char_id, scene_id=scene_id)
+
+    history = await get_history(user_id, char_id, scene_id)
+    opening = scenario.opening.get(lang, scenario.opening["en"])
+
+    if not history or not resume:
+        history = [{"role": "assistant", "content": opening}]
+        await save_history(user_id, char_id, scene_id, history)
+        text = f"{char.avatar} <b>{char.name}</b>\n\n{opening}"
+    else:
+        last = next((m["content"] for m in reversed(history) if m["role"] == "assistant"), opening)
+        text = f"{char.avatar} <b>{char.name}</b>\n\n<i>Continuing...</i>\n\n{last}"
+
+    if scenario.photo_file_id:
+        await message.answer_photo(
+            photo=scenario.photo_file_id,
+            caption=text,
+            reply_markup=chat_keyboard(lang),
+        )
+    else:
+        await message.answer(text, reply_markup=chat_keyboard(lang))
 
 logger = logging.getLogger(__name__)
 router = Router()
