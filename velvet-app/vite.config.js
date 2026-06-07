@@ -3,9 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/app/',   // nginx will serve at /app/
-  build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
-  },
+  base: '/',
 })
