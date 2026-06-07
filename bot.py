@@ -9,7 +9,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from config import config
 from database import init_db
 from middlewares import RegisterMiddleware
-from handlers import start, chat, shop, settings
+from handlers import start, chat, shop, settings, panel
 
 logging.basicConfig(
     level=logging.INFO,
@@ -28,6 +28,7 @@ async def main() -> None:
     dp.update.middleware(RegisterMiddleware())
 
     # Order matters: specific handlers first, catch-all last
+    dp.include_router(panel.router)
     dp.include_router(chat.router)
     dp.include_router(shop.router)
     dp.include_router(settings.router)

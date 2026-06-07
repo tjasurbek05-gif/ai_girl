@@ -10,6 +10,7 @@ from ai.prompts import get_character, get_scenario
 from database import (
     get_user, get_energy, consume_energy, is_premium,
     spend_gems, get_history, save_history, clear_history,
+    log_message,
 )
 from keyboards import scenarios_keyboard, chat_keyboard, no_energy_keyboard
 from locales import t
@@ -104,6 +105,7 @@ async def cb_scenario(callback: CallbackQuery, db_user: dict, state: FSMContext)
             )
         history = [{"role": "assistant", "content": opening}]
         await save_history(user_id, char_id, scene_id, history)
+        await log_message(user_id)
     else:
         await callback.bot.send_message(
             chat_id=user_id,

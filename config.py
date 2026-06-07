@@ -5,6 +5,7 @@ class Config(BaseSettings):
     BOT_TOKEN: str
     DEEPSEEK_API_KEY: str
     MEDIA_CHANNEL_ID: int
+    SUPER_ADMIN_ID: int
     DB_PATH: str = "velvet.db"
 
     DAILY_ENERGY: int = 49

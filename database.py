@@ -41,6 +41,20 @@ async def init_db():
                 created_at TEXT DEFAULT (datetime('now'))
             )
         """)
+        await db.execute("""
+            CREATE TABLE IF NOT EXISTS admins (
+                user_id    INTEGER PRIMARY KEY,
+                added_by   INTEGER,
+                added_at   TEXT DEFAULT (datetime('now'))
+            )
+        """)
+        await db.execute("""
+            CREATE TABLE IF NOT EXISTS message_log (
+                id      INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                date    TEXT    DEFAULT (DATE('now'))
+            )
+        """)
         await db.commit()
 
 
@@ -184,3 +198,98 @@ async def log_purchase(user_id: int, stars: int, plan: str, gems_delta: int):
             (user_id, stars, plan, gems_delta)
         )
         await db.commit()
+
+# ── Admin management ──────────────────────────────────────────────────────────
+
+async def is_admin(user_id: int) -> bool:
+    from config import config
+    if user_id == config.SUPER_ADMIN_ID:
+        return True
+    async with aiosqlite.connect(DB) as db:
+        async with db.execute(
+            "SELECT 1 FROM admins WHERE user_id=?", (user_id,)
+        ) as cur:
+            return await cur.fetchone() is not None
+
+
+async def add_admin(user_id: int, added_by: int) -> None:
+    async with aiosqlite.connect(DB) as db:
+        await db.execute(
+            "INSERT OR IGNORE INTO admins (user_id, added_by) VALUES (?,?)",
+            (user_id, added_by)
+        )
+        await db.commit()
+
+
+async def remove_admin(user_id: int) -> None:
+    async with aiosqlite.connect(DB) as db:
+        await db.execute("DELETE FROM admins WHERE user_id=?", (user_id,))
+        await db.commit()
+
+
+async def get_admins() -> list[dict]:
+    async with aiosqlite.connect(DB) as db:
+        db.row_factory = aiosqlite.Row
+        async with db.execute("SELECT * FROM admins ORDER BY added_at") as cur:
+            return [dict(r) for r in await cur.fetchall()]
+
+
+# ── Stats & message logging ───────────────────────────────────────────────────
+
+async def log_message(user_id: int) -> None:
+    """Call once per successful AI reply to power daily stats."""
+    async with aiosqlite.connect(DB) as db:
+        await db.execute(
+            "INSERT INTO message_log (user_id) VALUES (?)", (user_id,)
+        )
+        await db.commit()
+
+
+async def get_stats() -> dict:
+    async with aiosqlite.connect(DB) as db:
+        async with db.execute("SELECT COUNT(*) FROM users") as cur:
+            total_users = (await cur.fetchone())[0]
+
+        async with db.execute(
+            "SELECT COUNT(*) FROM users WHERE DATE(created_at)=DATE('now')"
+        ) as cur:
+            new_today = (await cur.fetchone())[0]
+
+        async with db.execute(
+            "SELECT COUNT(*) FROM users "
+            "WHERE sub_expires != '' AND sub_expires > datetime('now')"
+        ) as cur:
+            premium_users = (await cur.fetchone())[0]
+
+        async with db.execute(
+            "SELECT COUNT(DISTINCT user_id) FROM message_log WHERE date=DATE('now')"
+        ) as cur:
+            active_today = (await cur.fetchone())[0]
+
+        async with db.execute(
+            "SELECT COUNT(*) FROM message_log WHERE date=DATE('now')"
+        ) as cur:
+            messages_today = (await cur.fetchone())[0]
+
+        async with db.execute(
+            "SELECT COUNT(*), COALESCE(SUM(stars),0) FROM purchases "
+            "WHERE DATE(created_at)=DATE('now')"
+        ) as cur:
+            row = await cur.fetchone()
+            purchases_today, revenue_today = row[0], row[1]
+
+        async with db.execute(
+            "SELECT COALESCE(SUM(stars),0) FROM purchases"
+        ) as cur:
+            revenue_total = (await cur.fetchone())[0]
+
+    return {
+        "total_users":     total_users,
+        "new_today":       new_today,
+        "premium_users":   premium_users,
+        "active_today":    active_today,
+        "messages_today":  messages_today,
+        "purchases_today": purchases_today,
+        "revenue_today":   revenue_today,
+        "revenue_total":   revenue_total,
+    }
