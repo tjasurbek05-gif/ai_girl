@@ -32,7 +32,7 @@ async def chat_completion(
     user_message: str,
     *,
     max_tokens: int = 350,
-    temperature: float = 0.92,
+    temperature: float = 0.78,
 ) -> str | None:
     """
     Send a chat completion request to DeepSeek.
