@@ -1,5 +1,6 @@
 from aiogram.types import InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
+from aiogram.types import WebAppInfo
 
 from ai.prompts import CHARACTERS, Character
 from config import config
@@ -19,28 +20,27 @@ def lang_keyboard() -> InlineKeyboardMarkup:
 
 # ── Main menu ─────────────────────────────────────────────────────────────────
 
-def main_menu_keyboard(lang: str) -> InlineKeyboardMarkup:
+def main_menu_keyboard(lang: str):
     b = InlineKeyboardBuilder()
+    # Characters button opens Mini App directly
     if lang == "ru":
-        b.button(text="💬 Персонажи", callback_data="menu:characters")
+        b.button(text="💬 Персонажи", web_app=WebAppInfo(url="https://velvet-app.duckdns.org/"))
         b.button(text="👤 Профиль",   callback_data="menu:profile")
         b.button(text="🛍️ Магазин",  callback_data="menu:shop")
-    elif lang == "uz":
-        b.button(text="💬 Qahramonlar", callback_data="menu:characters")
-        b.button(text="👤 Profil",      callback_data="menu:profile")
-        b.button(text="🛍️ Do'kon",    callback_data="menu:shop")
-    else:
-        b.button(text="💬 Characters", callback_data="menu:characters")
-        b.button(text="👤 Profile",    callback_data="menu:profile")
-        b.button(text="🛍️ Shop",      callback_data="menu:shop")
-    if lang == "ru":
         b.button(text="⚙️ Настройки", callback_data="menu:settings")
     elif lang == "uz":
+        b.button(text="💬 Qahramonlar", web_app=WebAppInfo(url="https://velvet-app.duckdns.org/"))
+        b.button(text="👤 Profil",      callback_data="menu:profile")
+        b.button(text="🛍️ Do'kon",    callback_data="menu:shop")
         b.button(text="⚙️ Sozlamalar", callback_data="menu:settings")
     else:
-        b.button(text="⚙️ Settings", callback_data="menu:settings")
-    b.adjust(2, 1, 1)
+        b.button(text="💬 Characters", web_app=WebAppInfo(url="https://velvet-app.duckdns.org/"))
+        b.button(text="👤 Profile",    callback_data="menu:profile")
+        b.button(text="🛍️ Shop",      callback_data="menu:shop")
+        b.button(text="⚙️ Settings",   callback_data="menu:settings")
+    b.adjust(2, 2)
     return b.as_markup()
+
 
 
 # ── Character list ────────────────────────────────────────────────────────────
