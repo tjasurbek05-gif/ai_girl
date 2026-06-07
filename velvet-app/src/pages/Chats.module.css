@@ -1,0 +1,30 @@
+.wrap   { display:flex; flex-direction:column; height:100%; overflow:hidden; }
+.header { padding:16px 16px 12px; flex-shrink:0; }
+.title  { font-size:26px; font-weight:700; color:#fff; }
+
+.center { flex:1; display:flex; align-items:center; justify-content:center; }
+.spinner { width:28px; height:28px; border:2px solid rgba(155,127,255,.2); border-top-color:#9b7fff; border-radius:50%; animation:spin .8s linear infinite; }
+
+.empty     { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:40px; }
+.emptyIcon { font-size:48px; opacity:.4; }
+.emptyText { font-size:14px; color:#7a7890; text-align:center; line-height:1.5; }
+
+.list { flex:1; overflow-y:auto; padding:0 14px 14px; display:flex; flex-direction:column; gap:10px; }
+
+.chatRow { display:flex; gap:12px; align-items:flex-start; padding:14px; background:#13131a; border:1px solid rgba(255,255,255,.07); border-radius:16px; cursor:pointer; text-align:left; animation:fadeUp .3s ease both; transition:all .15s; font-family:'DM Sans',sans-serif; width:100%; }
+.chatRow:active { border-color:#9b7fff; background:rgba(155,127,255,.05); transform:scale(.99); }
+
+.avatar { width:52px; height:52px; border-radius:14px; overflow:hidden; background:#1e1a2e; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:26px; }
+.avatar img { width:100%; height:100%; object-fit:cover; object-position:top; }
+
+.info    { flex:1; min-width:0; }
+.chatTop { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
+.charName { font-size:15px; font-weight:600; color:#fff; }
+.time     { font-size:11px; color:#7a7890; flex-shrink:0; }
+
+.sceneBadge { display:inline-block; font-size:11px; color:#9b7fff; background:rgba(155,127,255,.1); border:1px solid rgba(155,127,255,.2); border-radius:20px; padding:2px 8px; margin-bottom:5px; }
+
+.lastMsg { font-size:12px; color:#7a7890; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+@keyframes spin    { to{transform:rotate(360deg)} }

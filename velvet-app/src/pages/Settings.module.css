@@ -1,0 +1,40 @@
+.wrap   { display:flex; flex-direction:column; height:100%; overflow-y:auto; }
+.header { padding:16px 16px 8px; flex-shrink:0; }
+.title  { font-size:26px; font-weight:700; color:#fff; }
+
+.section      { padding:0 16px 20px; }
+.sectionLabel { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#7a7890; margin-bottom:10px; }
+
+/* Plan card */
+.planCard   { background:#13131a; border:1px solid rgba(255,255,255,.07); border-radius:16px; padding:18px; }
+.planName   { font-size:22px; font-weight:700; color:#fff; margin-bottom:4px; }
+.planExpiry { font-size:13px; color:#9b7fff; margin-bottom:12px; }
+.planStats  { display:flex; align-items:center; gap:16px; }
+.stat       { display:flex; flex-direction:column; gap:2px; }
+.statVal    { font-size:16px; font-weight:600; color:#fff; }
+.statLabel  { font-size:11px; color:#7a7890; }
+.statDivider{ width:1px; height:32px; background:rgba(255,255,255,.07); }
+
+/* Subscription plans */
+.plans   { display:flex; flex-direction:column; gap:8px; }
+.planRow { background:#13131a; border:1px solid rgba(255,255,255,.07); border-radius:14px; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; position:relative; }
+.planPopular { border-color:rgba(155,127,255,.4); background:rgba(155,127,255,.05); }
+.popularBadge { position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:#9b7fff; color:#fff; font-size:10px; font-weight:700; letter-spacing:.05em; padding:3px 12px; border-radius:20px; white-space:nowrap; }
+.planLeft { display:flex; flex-direction:column; gap:3px; }
+.planRowLabel { font-size:15px; font-weight:600; color:#fff; }
+.planGems { font-size:12px; color:#7eb8ff; }
+.planPrice { font-size:16px; font-weight:700; color:#fff; }
+.payNote { font-size:11px; color:#7a7890; text-align:center; margin-top:10px; }
+
+/* Language */
+.langList { display:flex; flex-direction:column; gap:8px; }
+.langRow  { display:flex; align-items:center; gap:12px; padding:14px 16px; background:#13131a; border:1px solid rgba(255,255,255,.07); border-radius:14px; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all .15s; width:100%; }
+.langRow:active { transform:scale(.98); }
+.langActive { border-color:#9b7fff; background:rgba(155,127,255,.06); }
+.langFlag  { font-size:22px; }
+.langLabel { font-size:15px; font-weight:500; color:#fff; flex:1; text-align:left; }
+.langCheck { font-size:16px; color:#9b7fff; font-weight:700; }
+
+.toast { position:fixed; bottom:90px; left:50%; transform:translateX(-50%); background:#1e1e2e; border:1px solid rgba(255,255,255,.1); border-radius:20px; padding:10px 20px; font-size:14px; font-weight:500; color:#fff; white-space:nowrap; z-index:100; animation:fadeUp .2s ease; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(8px) translateX(-50%)} to{opacity:1;transform:translateY(0) translateX(-50%)} }
