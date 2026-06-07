@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Girl Mini‑App</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <section id="style-screen" class="screen">
+      <h2>Select a style</h2>
+      <div class="cards">
+        <button class="card" data-style="anime">
+          <img src="anime.svg" alt="Anime">
+          <span>Anime Style</span>
+        </button>
+        <button class="card" data-style="real">
+          <img src="real.svg" alt="Real‑Life">
+          <span>Real‑Life Style</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="character-screen" class="screen hidden">
+      <h2>Select a character</h2>
+      <div id="character-list" class="cards"></div>
+      <button class="back">← Back</button>
+    </section>
+
+    <section id="location-screen" class="screen hidden">
+      <h2>Select a starting location</h2>
+      <div class="cards" id="location-list">
+        <button class="card" data-location="Cozy Cafe">Cozy Cafe</button>
+        <button class="card" data-location="Rainy Streets">Rainy Streets</button>
+        <button class="card" data-location="Futuristic Lounge">Futuristic Lounge</button>
+        <button class="card" data-location="Sunset Beach">Sunset Beach</button>
+      </div>
+      <button class="back">← Back</button>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -16,8 +16,7 @@ def _lang_keyboard(current_lang: str):
     b.button(text=("✅ " if current_lang == "en" else "") + "🇬🇧 English", callback_data="lang:en")
     b.button(text=("✅ " if current_lang == "ru" else "") + "🇷🇺 Русский", callback_data="lang:ru")
     b.button(text=("✅ " if current_lang == "uz" else "") + "🇺🇿 O'zbek", callback_data="lang:uz")
-    b.button(text=t("back", current_lang), callback_data="menu:back")
-    b.adjust(2, 1, 1)
+    b.adjust(1)
     return b.as_markup()
 
 
@@ -29,7 +28,10 @@ async def cb_settings(callback: CallbackQuery, db_user: dict) -> None:
         "uz": "⚙️ <b>Sozlamalar</b>\n\nTilni tanlang:",
         "en": "⚙️ <b>Settings</b>\n\nChoose your language:",
     }
-    await callback.message.edit_text(texts.get(lang, texts["en"]), reply_markup=_lang_keyboard(lang))
+    await callback.message.edit_text(
+        texts.get(lang, texts["en"]),
+        reply_markup=_lang_keyboard(lang)
+    )
     await callback.answer()
 
 
@@ -41,7 +43,8 @@ async def cb_set_lang(callback: CallbackQuery, db_user: dict) -> None:
         return
 
     await set_lang(callback.from_user.id, new_lang)
-    await callback.message.edit_reply_markup(reply_markup=_lang_keyboard(new_lang))
 
-    ack = {"en": "✅ Language set!", "ru": "✅ Язык установлен!", "uz": "✅ Til o'rnatildi!"}
-    await callback.answer(ack.get(new_lang, "✅"), show_alert=False)
+    # After setting language — always go to main menu
+    from handlers.start import send_main_menu
+    db_user["lang"] = new_lang  # update in-memory so send_main_menu uses new lang
+    await send_main_menu(callback, new_lang)
