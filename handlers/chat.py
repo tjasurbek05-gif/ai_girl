@@ -17,6 +17,9 @@ from keyboards import scenarios_keyboard, chat_keyboard, no_energy_keyboard
 from locales import t
 from states import ChatStates
 
+logger = logging.getLogger(__name__)
+router = Router()
+
 @router.message(F.web_app_data)
 async def handle_webapp_data(message: Message, db_user: dict, state: FSMContext) -> None:
     lang = db_user["lang"]
@@ -63,8 +66,6 @@ async def handle_webapp_data(message: Message, db_user: dict, state: FSMContext)
     else:
         await message.answer(text, reply_markup=chat_keyboard(lang))
 
-logger = logging.getLogger(__name__)
-router = Router()
 
 
 @router.callback_query(F.data.startswith("char:"))
