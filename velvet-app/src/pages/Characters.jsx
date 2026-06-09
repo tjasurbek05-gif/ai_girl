@@ -24,8 +24,13 @@ export default function Characters({ lang, user }) {
   }
 
   const chooseScenario = (char, scene) => {
-    tg?.sendData(JSON.stringify({ char_id: char.id, scene_id: scene.id }))
+    const payload = `${char.id}__${scene.id}`
+    tg?.openTelegramLink(`https://t.me/Qiz_aibot?start=${payload}`)
+    tg?.close()
+    tg?.close()
   }
+
+
 
   if (view === "scenarios" && selected) return (
     <div className={styles.wrap}>

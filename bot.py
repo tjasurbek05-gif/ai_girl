@@ -9,7 +9,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from config import config
 from database import init_db
 from middlewares import RegisterMiddleware
-from handlers import start, chat, shop, settings, panel
+from handlers import start, chat, shop, settings, admin, panel
 
 logging.basicConfig(
     level=logging.INFO,
@@ -32,6 +32,7 @@ async def main() -> None:
     dp.include_router(chat.router)
     dp.include_router(shop.router)
     dp.include_router(settings.router)
+    dp.include_router(admin.router)
     dp.include_router(start.router)
 
     await init_db()
