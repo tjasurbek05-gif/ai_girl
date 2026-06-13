@@ -3,6 +3,7 @@ from pydantic_settings import BaseSettings
 
 class Config(BaseSettings):
     BOT_TOKEN: str
+    BOT_USERNAME: str = "VelvetAIBot"
     DEEPSEEK_API_KEY: str
     MEDIA_CHANNEL_ID: int
     SUPER_ADMIN_ID: int

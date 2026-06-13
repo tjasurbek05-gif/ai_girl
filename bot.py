@@ -10,6 +10,7 @@ from config import config
 from database import init_db
 from middlewares import RegisterMiddleware
 from handlers import start, chat, shop, settings, admin, panel
+from jobs.broadcast import broadcast_scheduler
 
 logging.basicConfig(
     level=logging.INFO,
@@ -38,6 +39,8 @@ async def main() -> None:
     await init_db()
     await bot.delete_webhook(drop_pending_updates=True)
     logger.info("Bot started.")
+
+    asyncio.create_task(broadcast_scheduler(bot))
 
     try:
         await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())

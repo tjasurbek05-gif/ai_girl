@@ -14,6 +14,7 @@ from database import (
     get_user, get_energy, consume_energy, is_premium,
     spend_gems, get_history, save_history, clear_history,
     log_message, is_message_processed, mark_message_processed,
+    get_last_animate_date, set_last_animate_date,
 )
 from keyboards import scenarios_keyboard, chat_keyboard, no_energy_keyboard
 from locales import t
@@ -27,6 +28,9 @@ _rate: dict[int, list[datetime]] = defaultdict(list)
 _RATE_LIMIT  = 10
 _RATE_WINDOW = timedelta(seconds=60)
 _MAX_MSG_LEN = 1000
+
+# ── Animate ───────────────────────────────────────────────────────────────────
+_ANIMATE_GEMS_COST = 50
  
  
 def _is_rate_limited(user_id: int) -> bool:
@@ -275,6 +279,39 @@ async def cb_chat_reset(callback: CallbackQuery, db_user: dict, state: FSMContex
     await callback.answer(t("chat_reset_done", lang))
  
  
+@router.callback_query(F.data == "chat:animate")
+async def cb_chat_animate(callback: CallbackQuery, db_user: dict, state: FSMContext) -> None:
+    lang    = db_user["lang"]
+    user_id = callback.from_user.id
+
+    fsm_data = await state.get_data()
+    char_id  = fsm_data.get("char_id")
+    scene_id = fsm_data.get("scene_id")
+
+    scenario = get_scenario(char_id, scene_id) if char_id and scene_id else None
+    if not scenario or not scenario.photo_file_id:
+        await callback.answer(t("animate_unavailable", lang), show_alert=True)
+        return
+
+    premium = await is_premium(user_id)
+    today = datetime.now().strftime("%Y-%m-%d")
+
+    if premium and await get_last_animate_date(user_id) != today:
+        await set_last_animate_date(user_id, today)
+    else:
+        user = await get_user(user_id)
+        gems = user["gems"] if user else 0
+        if gems < _ANIMATE_GEMS_COST:
+            await callback.answer(
+                t("not_enough_gems", lang, cost=_ANIMATE_GEMS_COST, gems=gems),
+                show_alert=True,
+            )
+            return
+        await spend_gems(user_id, _ANIMATE_GEMS_COST)
+
+    await callback.answer(t("animate_soon", lang), show_alert=True)
+
+
 @router.callback_query(F.data == "chat:menu")
 async def cb_chat_menu(callback: CallbackQuery, db_user: dict, state: FSMContext) -> None:
     await state.clear()

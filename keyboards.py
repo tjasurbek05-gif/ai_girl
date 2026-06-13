@@ -27,18 +27,21 @@ def main_menu_keyboard(lang: str):
         b.button(text="💬 Персонажи", web_app=WebAppInfo(url="https://velvet-app.duckdns.org/"))
         b.button(text="👤 Профиль",   callback_data="menu:profile")
         b.button(text="🛍️ Магазин",  callback_data="menu:shop")
+        b.button(text="💎 Гемы",      callback_data="menu:gems_store")
         b.button(text="⚙️ Настройки", callback_data="menu:settings")
     elif lang == "uz":
         b.button(text="💬 Qahramonlar", web_app=WebAppInfo(url="https://velvet-app.duckdns.org/"))
         b.button(text="👤 Profil",      callback_data="menu:profile")
         b.button(text="🛍️ Do'kon",    callback_data="menu:shop")
+        b.button(text="💎 Gemlar",     callback_data="menu:gems_store")
         b.button(text="⚙️ Sozlamalar", callback_data="menu:settings")
     else:
         b.button(text="💬 Characters", web_app=WebAppInfo(url="https://velvet-app.duckdns.org/"))
         b.button(text="👤 Profile",    callback_data="menu:profile")
         b.button(text="🛍️ Shop",      callback_data="menu:shop")
+        b.button(text="💎 Gems Store", callback_data="menu:gems_store")
         b.button(text="⚙️ Settings",   callback_data="menu:settings")
-    b.adjust(2, 2)
+    b.adjust(2, 2, 1)
     return b.as_markup()
 
 
@@ -73,8 +76,9 @@ def scenarios_keyboard(character: Character, lang: str) -> InlineKeyboardMarkup:
 def chat_keyboard(lang: str) -> InlineKeyboardMarkup:
     b = InlineKeyboardBuilder()
     b.button(text=t("reset_chat", lang),    callback_data="chat:reset")
+    b.button(text=t("animate_btn", lang),   callback_data="chat:animate")
     b.button(text=t("main_menu_btn", lang), callback_data="chat:menu")
-    b.adjust(2)
+    b.adjust(2, 1)
     return b.as_markup()
 
 
@@ -118,6 +122,36 @@ def get_plan_meta(plan_key: str) -> dict | None:
     for key, stars, gems, labels in _PLANS:
         if key == plan_key:
             return {"key": key, "stars": stars, "gems": gems, "labels": labels}
+    return None
+
+
+# ── Gems Store ────────────────────────────────────────────────────────────────
+
+_GEMS_PACKS = [
+    ("gems_85",   149,  85,   None),
+    ("gems_210",  349,  210,  "best"),
+    ("gems_540",  899,  540,  None),
+    ("gems_1360", 2249, 1360, None),
+    ("gems_2720", 2499, 2720, "value"),
+    ("gems_5000", 4999, 5000, None),
+]
+
+
+def gems_store_keyboard(lang: str) -> InlineKeyboardMarkup:
+    b = InlineKeyboardBuilder()
+    for pack_id, stars, gems, badge in _GEMS_PACKS:
+        prefix = "🔥 " if badge else ""
+        b.button(text=f"{prefix}💎 {gems} — ⭐{stars}", callback_data=f"buygems:{pack_id}")
+    b.button(text=t("back", lang), callback_data="menu:back")
+    b.adjust(1)
+    return b.as_markup()
+
+
+def get_gems_pack_meta(pack_id: str) -> dict | None:
+    """Return metadata for a gems pack id, or None if unknown."""
+    for key, stars, gems, badge in _GEMS_PACKS:
+        if key == pack_id:
+            return {"key": key, "stars": stars, "gems": gems, "badge": badge}
     return None
 
 

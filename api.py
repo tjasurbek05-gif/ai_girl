@@ -67,6 +67,7 @@ async def api_user(x_init_data: str = Header(...)):
         "gems":        user["gems"],
         "premium":     premium,
         "sub_expires": user.get("sub_expires", ""),
+        "bot_username": config.BOT_USERNAME,
     }
 
 
@@ -114,6 +115,12 @@ async def api_shop_items():
         {"id": "blindfold",     "name": {"en": "Blindfold",     "ru": "Повязка",        "uz": "Ko'z bog'i"},       "price": 60,  "emoji": "🎭"},
         {"id": "handcuffs",     "name": {"en": "Handcuffs",     "ru": "Наручники",      "uz": "Qo'l kishanlar"},   "price": 95,  "emoji": "⛓️"},
         {"id": "feather",       "name": {"en": "Feather",       "ru": "Перо",           "uz": "Pat"},              "price": 40,  "emoji": "🪶"},
+        {"id": "control_orb",   "name": {"en": "Control Orb",   "ru": "Сфера контроля", "uz": "Boshqaruv shari"},  "price": 300, "emoji": "🔮"},
+        {"id": "wine_bottle",   "name": {"en": "Bottle of Wine","ru": "Бутылка вина",   "uz": "Vino shishasi"},    "price": 12,  "emoji": "🍷"},
+        {"id": "cute_pajamas",  "name": {"en": "Cute Pajamas",  "ru": "Милая пижама",   "uz": "Yoqimli pijama"},   "price": 50,  "emoji": "🩱"},
+        {"id": "rose_bouquet",  "name": {"en": "Rose Bouquet",  "ru": "Букет роз",      "uz": "Atirgul guldastasi"}, "price": 25, "emoji": "💐"},
+        {"id": "perfume",       "name": {"en": "Perfume",       "ru": "Духи",           "uz": "Parfyum"},          "price": 65,  "emoji": "🧴"},
+        {"id": "jewelry_box",   "name": {"en": "Jewelry Box",   "ru": "Шкатулка",       "uz": "Taqinchoq qutisi"}, "price": 180, "emoji": "💍"},
     ]
 
 
@@ -171,3 +178,23 @@ async def api_set_lang(lang_code: str, x_init_data: str = Header(...)):
     from database import set_lang
     await set_lang(user_id, lang_code)
     return {"ok": True}
+
+
+@app.get("/api/gems/packs")
+async def api_gems_packs():
+    """Return purchasable gem packs (static for now). Purchases happen via the bot's Stars invoice."""
+    return [
+        {"id": "gems_85",   "gems": 85,   "stars": 149,  "badge": None},
+        {"id": "gems_210",  "gems": 210,  "stars": 349,  "badge": "best"},
+        {"id": "gems_540",  "gems": 540,  "stars": 899,  "badge": None},
+        {"id": "gems_1360", "gems": 1360, "stars": 2249, "badge": None},
+        {"id": "gems_2720", "gems": 2720, "stars": 2499, "badge": "value"},
+        {"id": "gems_5000", "gems": 5000, "stars": 4999, "badge": None},
+    ]
+
+
+@app.get("/api/referral/stats")
+async def api_referral_stats(x_init_data: str = Header(...)):
+    user_id = await get_uid(x_init_data)
+    from database import get_referral_stats
+    return await get_referral_stats(user_id)

@@ -18,10 +18,12 @@ async function apiFetch(path, options = {}) {
 }
 
 export const api = {
-  getUser:      ()         => apiFetch("/api/user"),
-  getChats:     ()         => apiFetch("/api/chats"),
-  getShopItems: ()         => apiFetch("/api/shop/items"),
-  getOwned:     ()         => apiFetch("/api/shop/owned"),
-  buyItem:      (item_id)  => apiFetch(`/api/shop/buy/${item_id}`, { method: "POST" }),
-  setLang:      (lang)     => apiFetch(`/api/user/lang/${lang}`, { method: "POST" }),
+  getUser:          ()         => apiFetch("/api/user"),
+  getChats:         ()         => apiFetch("/api/chats"),
+  getShopItems:     ()         => apiFetch("/api/shop/items"),
+  getOwned:         ()         => apiFetch("/api/shop/owned"),
+  buyItem:          (item_id)  => apiFetch(`/api/shop/buy/${item_id}`, { method: "POST" }),
+  setLang:          (lang)     => apiFetch(`/api/user/lang/${lang}`, { method: "POST" }),
+  getGemsPacks:     ()         => apiFetch("/api/gems/packs"),
+  getReferralStats: ()         => apiFetch("/api/referral/stats"),
 }

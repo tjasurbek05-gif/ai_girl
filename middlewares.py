@@ -19,6 +19,7 @@ class RegisterMiddleware(BaseMiddleware):
         data: dict,
     ) -> Any:
         db_user = None
+        is_new_user = False
 
         # aiogram 3 injects the real user here automatically
         tg_user = data.get("event_from_user")
@@ -30,9 +31,11 @@ class RegisterMiddleware(BaseMiddleware):
                 lang = raw_lang if raw_lang in SUPPORTED_LANGS else "en"
                 try:
                     db_user = await create_user(tg_user.id, lang)
+                    is_new_user = True
                     logger.info("Registered new user %s (lang=%s)", tg_user.id, lang)
                 except Exception as exc:
                     logger.exception("Failed to register user %s: %s", tg_user.id, exc)
 
         data["db_user"] = db_user
+        data["is_new_user"] = is_new_user
         return await handler(event, data)

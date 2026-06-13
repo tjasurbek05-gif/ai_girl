@@ -67,6 +67,70 @@ export const CHARACTERS = [
     ],
   },
   {
+    id: "mrs_grace",
+    name: "Mrs. Grace",
+    avatar: "👠",
+    type: "realistic",
+    photo_url: null,
+    tagline: {
+      en: "Confident, classy, in control",
+      ru: "Уверенная и элегантная",
+      uz: "Ishonchli va nafis",
+    },
+    scenarios: [
+      { id: "penthouse_office", label: { en: "🏙️ Penthouse Office",     ru: "🏙️ Офис в пентхаусе",  uz: "🏙️ Penthaus ofisi"     }, gems_cost: 0  },
+      { id: "grace_spa",        label: { en: "💆 Private Spa Evening", ru: "💆 Вечер в спа",        uz: "💆 Shaxsiy spa kechasi" }, gems_cost: 35 },
+    ],
+  },
+  {
+    id: "jane",
+    name: "Jane",
+    avatar: "📷",
+    type: "realistic",
+    photo_url: null,
+    tagline: {
+      en: "Girl-next-door with a wild side",
+      ru: "Соседская девушка с дерзким характером",
+      uz: "Qo'shni qiz, ammo o'zgacha",
+    },
+    scenarios: [
+      { id: "jane_apartment", label: { en: "🏠 Cozy Apartment",  ru: "🏠 Уютная квартира", uz: "🏠 Qulay kvartira" }, gems_cost: 0  },
+      { id: "jane_roadtrip",  label: { en: "🚗 Open Road Trip",  ru: "🚗 Путешествие",     uz: "🚗 Yo'l sayohati"  }, gems_cost: 25 },
+    ],
+  },
+  {
+    id: "bianca",
+    name: "Bianca",
+    avatar: "💋",
+    type: "realistic",
+    photo_url: null,
+    tagline: {
+      en: "Fiery Latina with big energy",
+      ru: "Огненная латиноамериканка",
+      uz: "Qaynoq lotin amerikalik",
+    },
+    scenarios: [
+      { id: "bianca_kitchen", label: { en: "🍳 Sunday Kitchen",     ru: "🍳 Воскресная кухня",   uz: "🍳 Yakshanba oshxonasi" }, gems_cost: 0  },
+      { id: "bianca_beach",   label: { en: "🏝️ Rio Beach Bonfire", ru: "🏝️ Костёр на пляже",    uz: "🏝️ Rio plyaji gulxani" }, gems_cost: 30 },
+    ],
+  },
+  {
+    id: "asha",
+    name: "Asha",
+    avatar: "🪷",
+    type: "realistic",
+    photo_url: null,
+    tagline: {
+      en: "Calm, grounding, deeply curious",
+      ru: "Спокойная и любознательная",
+      uz: "Tinch va qiziquvchan",
+    },
+    scenarios: [
+      { id: "asha_garden",  label: { en: "🌿 Botanical Garden", ru: "🌿 Ботанический сад", uz: "🌿 Botanika bog'i" }, gems_cost: 0  },
+      { id: "asha_retreat", label: { en: "🧘 Mountain Retreat", ru: "🧘 Горное ретрит",    uz: "🧘 Tog' retriti"   }, gems_cost: 20 },
+    ],
+  },
+  {
     id: "airi",
     name: "Airi",
     avatar: "⚡",
@@ -96,6 +160,70 @@ export const CHARACTERS = [
     scenarios: [
       { id: "anime_library", label: { en: "📚 Midnight Library", ru: "📚 Полночная библиотека", uz: "📚 Yarim tun kutubxona" }, gems_cost: 0  },
       { id: "anime_garden",  label: { en: "🌸 Moon Garden",      ru: "🌸 Лунный сад",          uz: "🌸 Oy bog'i"            }, gems_cost: 20 },
+    ],
+  },
+  {
+    id: "nika",
+    name: "Nika",
+    avatar: "🎮",
+    type: "anime",
+    photo_url: null,
+    tagline: {
+      en: "Playful gamer girl next door",
+      ru: "Игривая соседка-геймерша",
+      uz: "Qiziqchi qo'shni geymer qiz",
+    },
+    scenarios: [
+      { id: "game_den",    label: { en: "🎮 Game Den",          ru: "🎮 Игровая комната", uz: "🎮 O'yin xonasi"      }, gems_cost: 0  },
+      { id: "neon_arcade", label: { en: "🕹️ Neon Arcade Night", ru: "🕹️ Неоновая аркада", uz: "🕹️ Neon arkada tuni" }, gems_cost: 25 },
+    ],
+  },
+  {
+    id: "aurora",
+    name: "Aurora",
+    avatar: "🌌",
+    type: "anime",
+    photo_url: null,
+    tagline: {
+      en: "Dreamy stargazer, soft-spoken",
+      ru: "Мечтательная наблюдательница звёзд",
+      uz: "Xayolparast, yulduzlarni kuzatuvchi qiz",
+    },
+    scenarios: [
+      { id: "aurora_observatory", label: { en: "🔭 Hilltop Observatory", ru: "🔭 Обсерватория на холме", uz: "🔭 Tepalik observatoriyasi" }, gems_cost: 0  },
+      { id: "aurora_festival",    label: { en: "🎆 Lantern Festival",    ru: "🎆 Фестиваль фонариков",   uz: "🎆 Fonarlar festivali"      }, gems_cost: 20 },
+    ],
+  },
+  {
+    id: "coco",
+    name: "Coco",
+    avatar: "🍫",
+    type: "anime",
+    photo_url: null,
+    tagline: {
+      en: "Sweet tease with a sharp tongue",
+      ru: "Милая, но острая на язык",
+      uz: "Shirin, ammo so'zga chechan",
+    },
+    scenarios: [
+      { id: "coco_cafe", label: { en: "🍰 Pastel Café",         ru: "🍰 Пастельное кафе",      uz: "🍰 Pastel kafesi"     }, gems_cost: 0  },
+      { id: "coco_pool", label: { en: "🏊 Rooftop Pool Party",  ru: "🏊 Вечеринка у бассейна", uz: "🏊 Tom usti basseyni" }, gems_cost: 25 },
+    ],
+  },
+  {
+    id: "mistress_hellein",
+    name: "Mistress Hellein",
+    avatar: "🖤",
+    type: "anime",
+    photo_url: null,
+    tagline: {
+      en: "Dominant, sharp-tongued, commanding",
+      ru: "Властная, острая на язык",
+      uz: "Hukmron, so'zga chechan",
+    },
+    scenarios: [
+      { id: "hellein_throne",  label: { en: "🖤 Obsidian Hall",     ru: "🖤 Обсидиановый зал", uz: "🖤 Obsidian zali"     }, gems_cost: 0  },
+      { id: "hellein_dungeon", label: { en: "⛓️ Private Chambers", ru: "⛓️ Личные покои",     uz: "⛓️ Shaxsiy xonalar"   }, gems_cost: 40 },
     ],
   },
 ];

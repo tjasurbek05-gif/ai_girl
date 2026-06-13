@@ -1,10 +1,28 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { api } from "../api"
 import styles from "./Settings.module.css"
 
 export default function Settings({ lang, user, onLangChange, onRefresh }) {
   const [saving, setSaving] = useState(false)
   const [toast, setToast]   = useState(null)
+  const [referral, setReferral] = useState(null)
+
+  useEffect(() => {
+    api.getReferralStats().then(setReferral).catch(() => {})
+  }, [])
+
+  const referralLink = (user?.user_id && user?.bot_username)
+    ? `https://t.me/${user.bot_username}?start=ref_${user.user_id}`
+    : ""
+
+  const copyReferralLink = async () => {
+    try {
+      await navigator.clipboard.writeText(referralLink)
+      showToast("✅ " + (lang==="ru" ? "Ссылка скопирована" : lang==="uz" ? "Havola nusxalandi" : "Link copied"))
+    } catch {
+      showToast("❌ Error")
+    }
+  }
 
   const showToast = (msg) => {
     setToast(msg)
@@ -134,6 +152,40 @@ export default function Settings({ lang, user, onLangChange, onRefresh }) {
               {lang === l.code && <span className={styles.langCheck}>✓</span>}
             </button>
           ))}
+        </div>
+      </div>
+
+      {/* Affiliate program */}
+      <div className={styles.section}>
+        <div className={styles.sectionLabel}>
+          {lang==="ru" ? "Партнёрская программа" : lang==="uz" ? "Hamkorlik dasturi" : "Affiliate Program"}
+        </div>
+        <div className={styles.planCard}>
+          <div className={styles.planExpiry}>
+            {lang==="ru"
+              ? "Приглашай друзей и получай 20 💎 за их первую покупку"
+              : lang==="uz"
+              ? "Do'stlarni taklif qiling va ularning birinchi xaridi uchun 20 💎 oling"
+              : "Invite friends and earn 20 💎 for their first purchase"}
+          </div>
+          {referral && (
+            <div className={styles.planStats}>
+              <div className={styles.stat}>
+                <span className={styles.statVal}>{referral.referrals}</span>
+                <span className={styles.statLabel}>{lang==="ru"?"друзей":lang==="uz"?"do'stlar":"referrals"}</span>
+              </div>
+              <div className={styles.statDivider} />
+              <div className={styles.stat}>
+                <span className={styles.statVal}>💎 {referral.gems_earned}</span>
+                <span className={styles.statLabel}>{lang==="ru"?"заработано":lang==="uz"?"ishlandi":"earned"}</span>
+              </div>
+            </div>
+          )}
+          {referralLink && (
+            <button className={styles.copyBtn} onClick={copyReferralLink}>
+              {lang==="ru" ? "📋 Скопировать ссылку" : lang==="uz" ? "📋 Havolani nusxalash" : "📋 Copy referral link"}
+            </button>
+          )}
         </div>
       </div>
 

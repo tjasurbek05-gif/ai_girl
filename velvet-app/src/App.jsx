@@ -69,6 +69,16 @@ export default function App() {
     setView("scenarios")
   }
 
+  const requestCustomCharacter = () => {
+    if (sending) return
+    if (tg?.initData) {
+      setSending(true)
+      tg.sendData(JSON.stringify({ action: "custom_character_request" }))
+    } else {
+      alert("Custom character request")
+    }
+  }
+
   // ── Scenarios view ───────────────────────────────────────────────────────
   if (view === "scenarios" && selected) {
     return (
@@ -146,7 +156,11 @@ export default function App() {
 
       <div className={styles.grid}>
         {filter === "custom" && (
-          <div className={styles.customCard}>
+          <button
+            className={styles.customCard}
+            onClick={requestCustomCharacter}
+            disabled={sending}
+          >
             <div className={styles.customInner}>
               <div className={styles.customGems}>99 💎</div>
               {[...Array(30)].map((_, i) => (
@@ -167,7 +181,7 @@ export default function App() {
                 {lang === "ru" ? "Станет кем угодно" : lang === "uz" ? "Xohlagan qahramoningiz" : "Will become anyone you want"}
               </div>
             </div>
-          </div>
+          </button>
         )}
 
         {filter !== "custom" && filtered.map((char, i) => (

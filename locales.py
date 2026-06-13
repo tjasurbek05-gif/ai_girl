@@ -56,6 +56,34 @@ STRINGS: dict[str, dict[str, Any]] = {
         "main_menu_btn": "🏠 Main Menu",
         "reset_chat": "🔄 Reset chat",
         "error_generic": "⚠️ Something went wrong. Please try again.",
+        "gems_store_title": (
+            "💎 <b>Gems Store</b>\n\n"
+            "Buy gems directly with ⭐ Telegram Stars — use them to unlock special scenarios and shop items."
+        ),
+        "gems_invoice_title": "Velvet — {gems} Gems",
+        "gems_invoice_desc": "Get {gems} 💎 gems added to your account instantly.",
+        "gems_payment_ok": "✅ <b>Payment received!</b>\n\n💎 <b>+{gems} gems</b> added to your account!",
+        "animate_btn": "🎬 Animate",
+        "animate_unavailable": "🎬 No image available yet for this scene to animate.",
+        "animate_processing": "🎬 Animating... this may take a moment.",
+        "animate_done": "🎬 Here's your animation!",
+        "animate_soon": "🎬 Animations are coming soon! Stay tuned ✨",
+        "referral_bonus_awarded": "🤝 <b>+{gems} gems</b> — a friend you invited just made a purchase!",
+        "affiliate_card": (
+            "🤝 <b>Affiliate Program</b>\n\n"
+            "Invite friends and earn 💎 gems when they make their first purchase!\n\n"
+            "Your link:\n<code>{link}</code>\n\n"
+            "👥 Referrals: <b>{count}</b>\n"
+            "💎 Earned: <b>{earned}</b>"
+        ),
+        "custom_character_soon": (
+            "✨ <b>Custom characters are coming soon!</b>\n\n"
+            "This premium feature will let you build any companion you want for 99 💎. Stay tuned!"
+        ),
+        "reengagement_msg": (
+            "💌 Hey... it's been a while! <b>{name}</b> is waiting for you in your "
+            "<b>{scenario}</b> story. Come back? 🥺"
+        ),
     },
     "ru": {
         "choose_lang": "👋 Добро пожаловать в <b>Velvet</b>!\n\nВыбери язык:",
@@ -112,6 +140,34 @@ STRINGS: dict[str, dict[str, Any]] = {
         "main_menu_btn": "🏠 Главное меню",
         "reset_chat": "🔄 Сбросить чат",
         "error_generic": "⚠️ Что-то пошло не так. Попробуй ещё раз.",
+        "gems_store_title": (
+            "💎 <b>Магазин кристаллов</b>\n\n"
+            "Покупай кристаллы напрямую за ⭐ Telegram Stars — открывай особые сценарии и предметы."
+        ),
+        "gems_invoice_title": "Velvet — {gems} кристаллов",
+        "gems_invoice_desc": "Получи {gems} 💎 кристаллов на свой счёт мгновенно.",
+        "gems_payment_ok": "✅ <b>Оплата получена!</b>\n\n💎 <b>+{gems} кристаллов</b> добавлено на счёт!",
+        "animate_btn": "🎬 Анимация",
+        "animate_unavailable": "🎬 Для этой сцены пока нет изображения для анимации.",
+        "animate_processing": "🎬 Создаём анимацию... это может занять момент.",
+        "animate_done": "🎬 Вот твоя анимация!",
+        "animate_soon": "🎬 Анимации скоро появятся! Следи за обновлениями ✨",
+        "referral_bonus_awarded": "🤝 <b>+{gems} кристаллов</b> — друг, которого ты пригласил, совершил покупку!",
+        "affiliate_card": (
+            "🤝 <b>Партнёрская программа</b>\n\n"
+            "Приглашай друзей и получай 💎 кристаллы за их первую покупку!\n\n"
+            "Твоя ссылка:\n<code>{link}</code>\n\n"
+            "👥 Приглашено: <b>{count}</b>\n"
+            "💎 Заработано: <b>{earned}</b>"
+        ),
+        "custom_character_soon": (
+            "✨ <b>Свои персонажи скоро появятся!</b>\n\n"
+            "Эта премиум-функция позволит создать любого персонажа за 99 💎. Следи за обновлениями!"
+        ),
+        "reengagement_msg": (
+            "💌 Привет... давно не виделись! <b>{name}</b> ждёт тебя в истории "
+            "<b>{scenario}</b>. Вернёшься? 🥺"
+        ),
     },
     "uz": {
         "choose_lang": "👋 <b>Velvet</b> ga xush kelibsiz!\n\nTilni tanlang:",
@@ -168,6 +224,34 @@ STRINGS: dict[str, dict[str, Any]] = {
         "main_menu_btn": "🏠 Asosiy menyu",
         "reset_chat": "🔄 Chatni tozalash",
         "error_generic": "⚠️ Xatolik yuz berdi. Qaytadan urinib ko'ring.",
+        "gems_store_title": (
+            "💎 <b>Gemlar do'koni</b>\n\n"
+            "⭐ Telegram Stars orqali gemlar sotib oling — maxsus stsenariy va buyumlarni oching."
+        ),
+        "gems_invoice_title": "Velvet — {gems} gem",
+        "gems_invoice_desc": "Hisobingizga {gems} 💎 gem darhol qo'shiladi.",
+        "gems_payment_ok": "✅ <b>To'lov qabul qilindi!</b>\n\n💎 <b>+{gems} gem</b> hisobingizga qo'shildi!",
+        "animate_btn": "🎬 Animatsiya",
+        "animate_unavailable": "🎬 Bu sahna uchun hali animatsiya qilish uchun rasm yo'q.",
+        "animate_processing": "🎬 Animatsiya yaratilmoqda... bu biroz vaqt olishi mumkin.",
+        "animate_done": "🎬 Mana sizning animatsiyangiz!",
+        "animate_soon": "🎬 Animatsiyalar tez orada qo'shiladi! Kuzatib boring ✨",
+        "referral_bonus_awarded": "🤝 <b>+{gems} gem</b> — taklif qilgan do'stingiz xarid qildi!",
+        "affiliate_card": (
+            "🤝 <b>Hamkorlik dasturi</b>\n\n"
+            "Do'stlarni taklif qiling va ularning birinchi xaridi uchun 💎 gem oling!\n\n"
+            "Sizning havolangiz:\n<code>{link}</code>\n\n"
+            "👥 Taklif qilinganlar: <b>{count}</b>\n"
+            "💎 Ishlangan: <b>{earned}</b>"
+        ),
+        "custom_character_soon": (
+            "✨ <b>O'z qahramonlaringiz tez orada!</b>\n\n"
+            "Bu premium funksiya 99 💎 evaziga istalgan qahramonni yaratish imkonini beradi. Kuzatib boring!"
+        ),
+        "reengagement_msg": (
+            "💌 Salom... ko'rishmaganimizga ancha bo'ldi! <b>{name}</b> sizni "
+            "<b>{scenario}</b> hikoyasida kutmoqda. Qaytib kelasizmi? 🥺"
+        ),
     },
 }
 

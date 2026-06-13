@@ -3,7 +3,7 @@ import logging
 from datetime import datetime
 
 from aiogram import Router, F
-from aiogram.filters import CommandStart, Command
+from aiogram.filters import CommandStart, Command, CommandObject
 from aiogram.fsm.context import FSMContext
 from aiogram.types import (
     Message, CallbackQuery, WebAppInfo,
@@ -11,7 +11,7 @@ from aiogram.types import (
     KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove,
 )
 
-from database import get_user, get_energy, is_premium
+from database import get_user, get_energy, is_premium, set_referrer
 from keyboards import lang_keyboard, main_menu_keyboard
 from locales import t
 from states import ChatStates
@@ -87,9 +87,23 @@ async def send_main_menu(target: Message | CallbackQuery, lang: str) -> None:
         await target.answer(text, reply_markup=kb)
 
 
-@router.message(CommandStart())
-async def cmd_start(message: Message, db_user: dict | None, state: FSMContext) -> None:
+@router.message(CommandStart(deep_link=True))
+async def cmd_start(
+    message: Message,
+    db_user: dict | None,
+    state: FSMContext,
+    command: CommandObject,
+    is_new_user: bool = False,
+) -> None:
     await state.clear()
+
+    if is_new_user and command.args and command.args.startswith("ref_"):
+        try:
+            referrer_id = int(command.args[len("ref_"):])
+            await set_referrer(message.from_user.id, referrer_id)
+        except ValueError:
+            pass
+
     if db_user is None:
         await message.answer(t("choose_lang", "en"), reply_markup=lang_keyboard())
         return
@@ -109,6 +123,19 @@ async def handle_webapp_data(message: Message, db_user: dict, state: FSMContext)
     lang = db_user["lang"] if db_user else "en"
     try:
         data = json.loads(message.web_app_data.data)
+
+        action = data.get("action")
+        if action == "custom_character_request":
+            await message.answer(t("custom_character_soon", lang))
+            return
+        if action == "buy_gems":
+            pack_id = data.get("pack_id")
+            from handlers.shop import send_gems_invoice
+            ok = await send_gems_invoice(message.bot, message.from_user.id, pack_id, lang)
+            if not ok:
+                await message.answer(t("error_generic", lang))
+            return
+
         char_id  = data.get("char_id")
         scene_id = data.get("scene_id")
 
